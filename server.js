@@ -11,6 +11,7 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 
+
 /* ***********************
  * View Engine and templates
  *************************/
@@ -27,6 +28,8 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Routes
  *************************/
+app.use(express.static('public'));
+
 app.use(static)
 //index route
 app.get("/", function(req,res){
