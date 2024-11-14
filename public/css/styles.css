@@ -49,20 +49,25 @@ nav ul li a{
   grid-column: 1 / 2;
   width:90%;
 }
-
-.section1 div{
+.detail{
   grid-row: 1 / 2;
   grid-column: 1 / 2;
   z-index: 200000;
   background-color: rgba(151, 151, 185, 0.587);
-  width: 30%;
-  height:60%;
-  
+ padding: 2%;
+ width: fit-content;
+ height: fit-content;
+
+
 }
+.detail h3{
+  width: 100%;
+}
+
 .section1 div button{
   color:aliceblue;
   background-color: rgb(4, 82, 151);
-  padding: 5%;
+  padding: 2%;
 }
 .section1 div h3,p{
   padding: 0%;
@@ -147,8 +152,19 @@ nav{
   padding: 2%;
 
 }
-
-
+.detail{
+  margin-left: 10%;
+  padding: 5%;
+  margin-top: 3%;
+  
+}
+.detail h3{
+  font-size: 30px;
+}
+.detail p{
+  font-size: 20px;
+  padding-bottom: 5px;
+}
 
 
 }
