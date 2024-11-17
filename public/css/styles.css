@@ -76,7 +76,7 @@ nav ul li a{
 .reviews{
   display:flex;
   flex-direction: column;
-  align-items: left;
+ 
   justify-content: left;
   background-color: rgba(190, 190, 206, 0.587);
   margin-bottom: 2%;
@@ -85,7 +85,6 @@ nav ul li a{
 .reviews ul{
   display:flex;
   flex-direction: column;
-  align-items: left;
   justify-content: left;
   
 }
