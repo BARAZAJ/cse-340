@@ -6,7 +6,7 @@ CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
 ALTER TYPE public.account_type
-    OWNER TO cse340;
+    OWNER TO csecars_user;
 
 --Table structure for table `classification`
 CREATE TABLE public.classification (
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS public.inventory
 	inv_description text NOT NULL,
 	inv_image character varying NOT NULL,
 	inv_thumbnail character varying NOT NULL,
-	inv_price numeric(9,0) NOT NUL,
+	inv_price numeric(9,0) NOT NULL,
 	inv_miles integer NOT NULL,
 	inv_color character varying NOT NULL,
 	classification_id integer NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS public.account
     account_password character varying NOT NULL,
     account_type account_type NOT NULL DEFAULT 'Client'::account_type,
     CONSTRAINT account_pkey PRIMARY KEY (account_id)
-	)
+	);
 
 --Data for table `classification`
 INSERT INTO public.classification (classification_name)
@@ -256,38 +256,23 @@ VALUES   (
     'White',
     5
   );
-  INSERT INTO public.account (account_firstname, account_lastname, account_email, account_password)
-VALUES ('Tony', 'Stark', 'tony@starkent.com', 'Iam1ronM@n');
-
-UPDATE public.account
-SET account_type = 'Admin'
-WHERE account_email = 'tony@starkent.com';
-
-DELETE FROM public.account
-WHERE account_email = 'tony@starkent.com';
 
 UPDATE public.inventory
 SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
 WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 
-
-SELECT 
-    inventory.inv_make, 
-    inventory.inv_model, 
-    classification.classification_name
-FROM 
-    public.inventory
-INNER JOIN 
-    public.classification 
-ON 
-    inventory.classification_id = classification.classification_id
-WHERE 
-    classification.classification_name = 'Sport';
-
 UPDATE public.inventory
 SET 
     inv_image = CONCAT('/images/vehicles/', SUBSTRING(inv_image FROM 9)),
     inv_thumbnail = CONCAT('/images/vehicles/', SUBSTRING(inv_thumbnail FROM 9));
+
+
+
+
+
+
+
+
 
 
 
