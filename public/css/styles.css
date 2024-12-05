@@ -29,7 +29,10 @@ nav ul {
   justify-content: space-evenly;
   list-style: none;
 }
-
+nav ul a:hover{
+  background-color: antiquewhite;
+  color:black;
+}
 nav {
   background-color: black;
   padding:5%;
@@ -123,6 +126,38 @@ nav ul li a{
 h4{
   padding: 2%;
 }
+.vehicle-detail{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 3px;
+  margin:3%;
+}
+#inv-display{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#inv-display li{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(182, 180, 177, 0.642);
+  padding: 2%;
+  border-radius: 2%;
+  height: 400px;
+  width: 300px;
+ margin: 10px;
+}
+h1{
+ 
+  padding-left: 5%;
+}
 
 @media only screen and (min-width:765px){
 .section2{
@@ -164,6 +199,16 @@ nav{
   font-size: 20px;
   padding-bottom: 5px;
 }
+.vehicle-detail{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.vehicle-detail div{
+  padding: 3%;
+}
+
+
 
 }
 

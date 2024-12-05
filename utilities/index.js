@@ -88,16 +88,17 @@ Util.buildVehicleDetail = function (vehicle) {
 
   return `
     <div class="vehicle-detail">
-      <h1>${vehicle.inv_year || "Unknown Year"} ${vehicle.inv_make || "Unknown Make"} ${vehicle.inv_model || "Unknown Model"}</h1>
-      <img src="${vehicle.inv_image || "/images/placeholder.png"}" alt="Image of ${vehicle.inv_make || "Vehicle"}">
-      <h2>Price: ${formattedPrice}</h2>
-      <h3>Mileage: ${formattedMileage}</h3>
-      <h3> Description: ${vehicle.inv_description}</h3>
-      <ul>
-        <li>Color: ${vehicle.inv_color || "Not specified"}</li>
-      
-        
-      </ul>
+      <div>
+        <h1>${vehicle.inv_year || "Unknown Year"} ${vehicle.inv_make || "Unknown Make"} ${vehicle.inv_model || "Unknown Model"}</h1>
+        <img src="${vehicle.inv_image || "/images/placeholder.png"}" alt="Image of ${vehicle.inv_make || "Vehicle"}">
+      </div>
+      <div>
+        <h2>${vehicle.inv_make} ${vehicle.inv_model} details</h2>
+        <p><strong>Price:</strong> ${formattedPrice}</p>
+        <p><strong> Description:</strong> ${vehicle.inv_description}</p>
+        <p><strong>Color:</strong> ${vehicle.inv_color || "Not specified"}</p>
+        <p><strong>Mileage:</strong> ${formattedMileage}</p>
+      </div>
     </div>
   `;
 };

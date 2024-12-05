@@ -11,6 +11,8 @@ const staticRoutes = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoutes = require("./routes/inventoryRoute");
 const errorController = require("./controllers/errorController");
+const Util = require('./utilities'); // CommonJS
+
 
 /* ***********************
  * View Engine and templates
@@ -39,18 +41,32 @@ app.use("/inv", inventoryRoutes);
 // Intentional error route
 app.get("/cause-error", errorController.throwError);
 
+// 404 Error Handler
+app.use(async (req, res, next) => {
+  const nav = await Util.getNav(); // Fetch navigation for the 404 page
+  res.status(404).render("error", {
+    title: "404 - Page Not Found",
+    message: "Sorry, the page you are looking for does not exist.",
+    error: null, // No error details for a 404
+    nav,
+  });
+});
+
 /* ***********************
  * Error-handling Middleware
  *************************/
-app.use((err, req, res, next) => {
-  console.error(err.stack); // Log the error for debugging
+// Global Error Handler
+app.use(async (err, req, res, next) => {
+  console.error(err.stack); // Log the error stack trace for debugging
+  const nav = await Util.getNav(); // Fetch navigation dynamically
   res.status(err.status || 500).render("error", {
     title: "Server Error",
-    message: "Oh no! There was a crash. May be try a different route?",
-    error: err.status === 500 ? null : err.message, // Show error details only if not 500
-    nav: "<ul><li>Home</li><li>Inventory</li></ul>", // Include navigation in error page
+    message: err.message || "An unexpected error occurred on the server.",
+    error: process.env.NODE_ENV === "development" ? err : null, // Show error details only in development
+    nav,
   });
 });
+
 
 app.use((req, res, next) => {
   res.locals.nav = "<ul><li>Home</li><li>Inventory</li></ul>"; // Replace with actual navigation HTML or logic
