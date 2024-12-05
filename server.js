@@ -46,7 +46,7 @@ app.use(async (req, res, next) => {
   const nav = await Util.getNav(); // Fetch navigation for the 404 page
   res.status(404).render("error", {
     title: "404 - Page Not Found",
-    message: "Sorry, the page you are looking for does not exist.",
+    message: "404- Sorry, the page you are looking for does not exist.",
     error: null, // No error details for a 404
     nav,
   });
@@ -66,7 +66,23 @@ app.use(async (err, req, res, next) => {
     nav,
   });
 });
+// Route to explicitly trigger a server error (500)
+app.get('/cause-error', (req, res, next) => {
+  // Simulate an error
+  const error = new Error('505 - This is a simulated server error.');
+  error.status = 500; // Set the status code for the error
+  next(error); // Pass the error to the error-handling middleware
+});
 
+// Catch-all 404 handler for undefined routes
+app.use(async (req, res, next) => {
+  const nav = await Util.getNav(); // Fetch navigation if needed
+  res.status(404).render('error', {
+      title: '404 - Page Not Found',
+      message: 'Error 404: The page you are looking for does not exist.',
+      nav, // Pass navigation data if available
+  });
+});
 
 app.use((req, res, next) => {
   res.locals.nav = "<ul><li>Home</li><li>Inventory</li></ul>"; // Replace with actual navigation HTML or logic
